@@ -36,7 +36,13 @@ starkli declare target/dev/nftstarter_NFTStarter.contract_class.json --network=s
 ```bash
 starkli deploy <CLASS_HASH> <CONSTRUCTOR_INPUTS> --network <NETWORK> --account ./account.json --keystore ./keystore.json
 
-# starkli deploy 0x06802c4c67a5c66b3922f162496997ae14bb3e1bc3aee0633fa562d7b560e08b str:GALOIS 6 str:GAL 3 0x4b7abb48d891de884d5e4fb7579b88833ef99d621f4a5aaa036830e70e7dcfb --network sepolia --account ./account.json --keystore ./keystore.json
+# starkli deploy 0x00db872c1c126625e7c481e278b05edceab89bc5dc60140b0b9b0bb765224cf4 str:GALOIS 6 str:GAL 3 0x28a05038b835b9cfb77da07d8b921c012b7e277263d10c0a3d39674ff664957 --network sepolia --account ./account.json --keystore ./keystore.json
+```
+
+## Bridge NFT l2 -> l1
+
+```bash
+starkli invoke <ADDRESS_NFT_STARTER> send_message_struct <TO_ADDRESS> <ETH_RECEIVER_NFT> <TOKEN_ID> --account ./account.json --keystore ./keystore.json --network sepolia
 ```
 
 # Soldity contracts

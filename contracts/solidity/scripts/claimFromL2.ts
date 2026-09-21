@@ -18,11 +18,7 @@ async function main() {
 
     let tokenID = 2;
 
-    // approve the bridge to transfer the NFT
-    // const nft = new ethers.Contract(nftAddress, ERC721ABI, signer);
-    // await nft.approve(BridgeAddress, tokenID);
-
-    const tx = await bridge.lockNFT(nftAddress, tokenID, selector, l2Address, l2receiver, { value: parseEther("0.00001"), gasLimit: 1000000n });
+    const tx = await bridge.consumeMessage(nftAddress, l2Address, ['0x19171a5da52276b6a034CB859ddA1e905739F8B2', tokenID], { gasLimit: 1000000n });
     console.log(tx.hash);
 }
 

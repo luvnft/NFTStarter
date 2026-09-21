@@ -283,3 +283,5 @@ export {
   sepoliaMainnetStrkClassHash,
   universalErc20Abi,
 };
+
+export const BRIDGE_CONTRACT = "0xcE9A70720F347Bce53E83FEacAdaed720256C155"

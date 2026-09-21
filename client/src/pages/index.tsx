@@ -21,8 +21,12 @@ export default function HomePage() {
             </div>
 
             {/* Feature 2 */}
-            <div className="p-6 h-52 transform border-base-content/20 hover:border-base-content/40 border row-span-1 col-span-2">
-              <h2 className="font-semibold mb-4 text-3xl">Lazy mint NFT on Startnet</h2>
+            <div className="relative px-6 pt-6 h-52 transform border-base-content/20 hover:border-base-content/40 border row-span-1 col-span-2">
+              <h2 className="font-semibold mb-4 text-3xl">Lazy mint NFT on </h2>
+              <h2 className="font-semibold mb-4 text-3xl text-secondary">Startnet</h2>
+              <div className='flex justify-end h-full w-full absolute top-[-40px]'>
+                <div className='h-60 w-72 bg-cover' style={{ backgroundImage : `url('./imgs/mint.png')`}} />
+              </div>
             </div>
 
             <div className="h-52 transform border-base-content/20 hover:border-base-content/40 border row-span-1 col-span-1">
@@ -34,7 +38,7 @@ export default function HomePage() {
               <h2 className="text-2xl font-semibold text-purple-600 mb-4">Explore Our App Features 🎉🎉🎉</h2>
               <div className='h-full flex items-center'>
                 {address ?
-                  <Link href={`/profile/${address}`}>
+                  <Link href={`/studio/create`}>
                     <button className="btn btn-primary w-36">Start mint</button>
                   </Link>
                 :
@@ -46,20 +50,27 @@ export default function HomePage() {
             {/* Feature 3 */}
             <div className="transform h-52 border-base-content/20 hover:border-base-content/40 border bg-black row-span-1 col-span-1 relative">
               <div className='absolute z-0 top-0 h-full w-full bg-cover bg-center' style={{ backgroundImage : `url('./imgs/the-creation-adam.png')`}} />
-              <h1 className="absolute p-6 bottom-0 z-10 text-5xl font-bold text-center text-primary">Bridge NFT</h1>
+              <div className='absolute p-8 h-full w-full flex flex-col justify-between gap-8'>
+                <h1 className="bottom-0 z-10 text-2xl font-bold text-left text-primary">Bridge NFT</h1>
+                <Link href={`/bridge`}>
+                  <button className="btn btn-secondary w-36">Bridge</button>
+                </Link>
+              </div>
             </div>
 
             {/* Feature 4 */}
             <div className="ransform h-52 border-base-content/20 hover:border-base-content/40 border row-span-1 col-span-2">
-              <div className='h-full w-full bg-cover bg-center' style={{ backgroundImage : `url('./imgs/starknet-big.png')`}} />
+              <div className='h-full w-full bg-cover bg-center' style={{ backgroundImage : `url('/imgs/starknet-big.png')`}} />
             </div>
 
             <div className="p-6 transform h-full border-base-content/20 hover:border-base-content/40 border row-span-1 col-span-1">
-
+              <h2 className="text-2xl font-semibold text-purple-600 mb-4">Explore NFT 🎉🎉🎉</h2>
+              <div className='h-full flex items-center'>
+              </div>
             </div>
 
-            <div className="p-6 transform h-full border-base-content/20 hover:border-base-content/40 border row-span-1 col-span-1">
-
+            <div className="transform h-full border-base-content/20 hover:border-base-content/40 border row-span-1 col-span-1">
+              <div className='h-full w-full bg-cover bg-center' style={{ backgroundImage : `url('/imgs/studio-create.png')`}} />
             </div>
           </div>
         </div>

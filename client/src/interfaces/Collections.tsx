@@ -1,5 +1,5 @@
 export interface Trait {
-  trait_type: string;
+  traitType: string;
   value: string;
 }
 
@@ -9,7 +9,8 @@ export interface Token {
   name: string;
   description: string;
   externalLink: string;
-  traits?: Trait[]
+  traits?: Trait[];
+  isClaimed: boolean;
 }
 
 export interface Collections {
@@ -19,7 +20,7 @@ export interface Collections {
   name: string;
   symbol: string;
   contractAddress: string;
-  tokens: Token[];
+  tokens?: Token[];
   createdAt?: Date;
   updatedAt?: Date;
 }

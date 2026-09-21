@@ -1,11 +1,10 @@
 import Card from "./Card"
 
-export default function Collections() {
-  const array = [1,2,3,4]
+export default function Collections({collections}:any) {
   return (
     <div className="grid grid-cols-5 gap-4">
-      {array.map((value,index) =>
-        <Card key={index} />
+      {collections.map((value:any,index:any) =>
+        <Card key={index} image={value.image} name={value.name} description={value.symbol} />
       )}
     </div>
   )

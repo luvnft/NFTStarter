@@ -51,7 +51,7 @@ fn test_lazy_mint() {
     let msg_hash: felt252 = 0x12345678;
     let (r, s): (felt252, felt252) = key_pair.sign(msg_hash).unwrap();
 
-    let uri  = "https://api.example.com/v1/";
+    let uri  = 'https://api.example.com/v1/';
     let signature = array![r, s].span();
     let token_id : u256 = 1;
 
@@ -61,7 +61,7 @@ fn test_lazy_mint() {
     assert_eq!(is_valid, true);
 
     let token_uri = dispatcher.get_token_uri(token_id);
-    assert_eq!(token_uri, "https://api.example.com/v1/");
+    assert_eq!(token_uri, 'https://api.example.com/v1/');
 
     let dispatcher = IERC721Dispatcher { contract_address };
     let owner = dispatcher.owner_of(token_id);
@@ -80,7 +80,7 @@ fn test_lazy_mint_revert_with_replay_signature() {
     let msg_hash: felt252 = 0x12345678;
     let (r, s): (felt252, felt252) = key_pair.sign(msg_hash).unwrap();
 
-    let uri  = "https://api.example.com/v1/";
+    let uri  = 'https://api.example.com/v1/';
     let signature = array![r, s].span();
     let token_id : u256 = 1;
 
@@ -88,7 +88,7 @@ fn test_lazy_mint_revert_with_replay_signature() {
     dispatcher.lazy_mint(test_address(), uri, token_id, msg_hash, signature);
 
     assert_eq!(dispatcher.signature_is_used(signature), true);
-    dispatcher.lazy_mint(test_address(), "https://api.example.com/v2/", token_id + 1, msg_hash, signature);
+    dispatcher.lazy_mint(test_address(), 'https://api.example.com/v2/', token_id + 1, msg_hash, signature);
 }
 
 #[test]
@@ -103,10 +103,38 @@ fn test_lazy_mint_revert_with_invalid_signature() {
     let msg_hash: felt252 = 0x12345678;
     let (r, s): (felt252, felt252) = key_pair.sign(msg_hash).unwrap();
 
-    let uri  = "https://api.example.com/v1/";
+    let uri  = 'https://api.example.com/v1/';
     let signature = array![r, s].span();
     let token_id : u256 = 2;
 
     dispatcher.lazy_mint(test_address(), uri, token_id, msg_hash, signature);
+}
+
+#[test]
+fn test_contract_can_receive_nft() {
+    let contract_address = deploy_contract();
+    let dispatcher = INFTStarterDispatcher { contract_address };
+
+    let key_pair = get_key_pair();
+
+    let msg_hash: felt252 = 0x12345678;
+    let (r, s): (felt252, felt252) = key_pair.sign(msg_hash).unwrap();
+
+    let uri  = 'https://api.example.com/v1/';
+    let signature = array![r, s].span();
+    let token_id : u256 = 1;
+
+    assert_eq!(dispatcher.signature_is_used(signature), false);
+    dispatcher.lazy_mint(test_address(), uri, token_id, msg_hash, signature);
+
+    start_cheat_caller_address_global(test_address());
+    let dispatcher = IERC721Dispatcher { contract_address };
+    dispatcher.transfer_from(test_address(), contract_address, token_id);
+    stop_cheat_caller_address_global();
+
+    let dispatcher = IERC721Dispatcher { contract_address };
+    let owner = dispatcher.owner_of(token_id);
+
+    assert_eq!(owner, contract_address);
 }
 
